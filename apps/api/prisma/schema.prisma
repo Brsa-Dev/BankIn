@@ -1,0 +1,132 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- UTILISATEUR ---
+
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  passwordHash String
+  firstName    String
+  lastName     String
+  currency     String        @default("EUR")
+  createdAt    DateTime      @default(now())
+
+  institutions Institution[]
+  budgets      Budget[]
+  goals        Goal[]
+}
+
+// --- INSTITUTIONS & COMPTES ---
+
+model Institution {
+  id      Int       @id @default(autoincrement())
+  name    String
+  logoUrl String?
+  userId  Int
+  user    User      @relation(fields: [userId], references: [id])
+
+  accounts Account[]
+}
+
+model Account {
+  id            Int          @id @default(autoincrement())
+  name          String
+  type          AccountType
+  balance       Decimal      @db.Decimal(15, 2)
+  currency      String       @default("EUR")
+  institutionId Int
+  institution   Institution  @relation(fields: [institutionId], references: [id])
+
+  transactions  Transaction[]
+}
+
+enum AccountType {
+  CHECKING        // Compte courant
+  SAVINGS         // Livret (A, LDDS...)
+  INVESTMENT      // PEA, Compte-titres
+  LIFE_INSURANCE  // Assurance-vie
+  CRYPTO
+}
+
+// --- TRANSACTIONS ---
+
+model Transaction {
+  id          Int              @id @default(autoincrement())
+  label       String
+  amount      Decimal          @db.Decimal(15, 2)
+  date        DateTime
+  type        TransactionType
+  accountId   Int
+  account     Account          @relation(fields: [accountId], references: [id])
+  categoryId  Int?
+  category    Category?        @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime         @default(now())
+}
+
+enum TransactionType {
+  DEBIT
+  CREDIT
+}
+
+model Category {
+  id           Int           @id @default(autoincrement())
+  name         String
+  icon         String?
+  color        String?
+
+  transactions Transaction[]
+  budgets      Budget[]
+}
+
+// --- ACTIFS ---
+
+model Asset {
+  id               Int        @id @default(autoincrement())
+  name             String
+  type             AssetType
+  estimatedValue   Decimal    @db.Decimal(15, 2)
+  currency         String     @default("EUR")
+  userId           Int
+
+  @@index([userId])
+}
+
+enum AssetType {
+  REAL_ESTATE   // Immobilier
+  STOCK         // Actions
+  CRYPTO
+  VEHICLE
+  OTHER
+}
+
+// --- BUDGET & OBJECTIFS ---
+
+model Budget {
+  id         Int      @id @default(autoincrement())
+  month      Int      // 1-12
+  year       Int
+  limit      Decimal  @db.Decimal(15, 2)
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model Goal {
+  id           Int      @id @default(autoincrement())
+  name         String
+  targetAmount Decimal  @db.Decimal(15, 2)
+  currentAmount Decimal @db.Decimal(15, 2) @default(0)
+  deadline     DateTime?
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+}
