@@ -15,6 +15,7 @@ import { GoalsController } from './modules/goals/goals.controller';
 import { GoalsService } from './modules/goals/goals.service';
 import {BudgetsModule} from "./modules/budgets/budgets.module";
 import {GoalsModule} from "./modules/goals/goals.module";
+import { PatrimoineModule } from './modules/patrimoine/patrimoine.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import {GoalsModule} from "./modules/goals/goals.module";
     AssetsModule,
     BudgetsModule,
     GoalsModule,
+    PatrimoineModule,
   ],
   controllers: [AssetsController, BudgetsController, GoalsController],
   providers: [AssetsService, BudgetsService, GoalsService],

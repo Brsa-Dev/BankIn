@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package patrimoine;
+
+service PatrimoineService {
+  rpc Calculate (CalculateRequest) returns (CalculateResponse);
+}
+
+message CalculateRequest {
+  repeated double account_balances = 1;
+  repeated double asset_values = 2;
+}
+
+message CalculateResponse {
+  double total = 1;
+  double total_accounts = 2;
+  double total_assets = 3;
+}
