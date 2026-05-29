@@ -1,1 +1,0 @@
-G:\BankIn\apps\rust-services\target\debug\rust-services.exe: G:\BankIn\apps\rust-services\build.rs G:\BankIn\apps\rust-services\proto G:\BankIn\apps\rust-services\proto/patrimoine.proto G:\BankIn\apps\rust-services\src\main.rs G:\BankIn\apps\rust-services\target\debug\build\rust-services-9802f5ae24662c08\out\patrimoine.rs
