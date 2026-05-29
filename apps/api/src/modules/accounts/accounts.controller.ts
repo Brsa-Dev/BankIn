@@ -1,14 +1,16 @@
-import { Controller, Get, Post, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Param, Body, UseGuards, Request } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto } from './dto/create-account.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('accounts')
 export class AccountsController {
     constructor(private readonly accountsService: AccountsService) {}
 
-    @Get('user/:userId')
-    findAll(@Param('userId') userId: string) {
-        return this.accountsService.findAll(+userId);
+    @Get()
+    findAll(@Request() req) {
+        return this.accountsService.findAll(req.user.userId);
     }
 
     @Get(':id')

@@ -1,0 +1,22 @@
+# docker-compose.yml
+services:
+  postgres:
+    image: postgres:16
+    container_name: bankin-postgres
+    environment:
+      POSTGRES_USER: bankin
+      POSTGRES_PASSWORD: bankin
+      POSTGRES_DB: bankin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: bankin-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
