@@ -17,6 +17,14 @@ services:
     ports:
       - "6379:6379"
 
+  rust-services:
+    build:
+      context: ./apps/rust-services
+      dockerfile: Dockerfile
+    container_name: bankin-rust
+    ports:
+      - "50051:50051"
+
   api:
     build:
       context: ./apps/api
@@ -27,9 +35,11 @@ services:
     environment:
       DATABASE_URL: postgresql://bankin:bankin@postgres:5432/bankin
       JWT_SECRET: une_cle_secrete_longue_et_complexe
+      RUST_SERVICE_URL: rust-services:50051
     depends_on:
       - postgres
       - redis
+      - rust-services
 
 volumes:
   postgres_data:

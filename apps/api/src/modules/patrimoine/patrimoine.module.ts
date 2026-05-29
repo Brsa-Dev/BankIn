@@ -11,7 +11,7 @@ import { PatrimoineService } from './patrimoine.service';
         name: 'PATRIMOINE_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          url: 'localhost:50051',
+          url: process.env.RUST_SERVICE_URL || 'localhost:50051',
           package: 'patrimoine',
           protoPath: join(__dirname, '../../proto/patrimoine.proto'),
         },
