@@ -1,4 +1,4 @@
-<div class="app-layout">
+<div class="app-layout" *ngIf="isLoggedIn">
   <app-sidebar />
   <div class="app-content">
     <app-topbar />
@@ -6,4 +6,8 @@
       <router-outlet />
     </main>
   </div>
+</div>
+
+<div *ngIf="!isLoggedIn">
+  <router-outlet />
 </div>

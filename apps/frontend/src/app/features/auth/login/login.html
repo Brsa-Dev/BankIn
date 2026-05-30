@@ -1,0 +1,65 @@
+<div class="auth-container">
+
+  <!-- Panel gauche -->
+  <div class="auth-brand">
+    <div class="brand-top">
+      <div class="brand-logo">
+        <div class="brand-mark">B</div>
+        <span>BankIn</span>
+      </div>
+    </div>
+    <div class="brand-mid">
+      <h2>Tout votre patrimoine,<br/>en un seul endroit.</h2>
+      <p>Agrégez vos comptes, suivez vos investissements et pilotez votre épargne avec une vision claire.</p>
+      <div class="stat-card">
+        <span class="stat-label">Patrimoine net</span>
+        <span class="stat-value">247 850 €</span>
+        <span class="stat-delta">+3,82 %</span>
+      </div>
+    </div>
+    <div class="brand-foot">
+      <mat-icon>shield</mat-icon>
+      <span>Chiffrement bancaire AES-256</span>
+    </div>
+  </div>
+
+  <!-- Panel droit -->
+  <div class="auth-form-side">
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <a routerLink="/auth/login" routerLinkActive="active">Connexion</a>
+        <a routerLink="/auth/register" routerLinkActive="active">Créer un compte</a>
+      </div>
+
+      <h2>Bon retour 👋</h2>
+      <p class="auth-sub">Connectez-vous pour accéder à votre tableau de bord.</p>
+
+      <div class="field">
+        <label>Adresse e-mail</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-icon matPrefix>mail</mat-icon>
+          <input matInput type="email" [(ngModel)]="email" placeholder="vous@email.com" />
+        </mat-form-field>
+      </div>
+
+      <div class="field">
+        <label>Mot de passe</label>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" placeholder="••••••••" />
+          <button mat-icon-button matSuffix (click)="showPassword = !showPassword">
+            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div class="auth-error" *ngIf="error">{{ error }}</div>
+
+      <button mat-flat-button class="btn-login" (click)="login()">
+        Se connecter
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+
+</div>
