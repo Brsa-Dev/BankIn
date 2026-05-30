@@ -1,0 +1,50 @@
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">B</div>
+    <span class="brand-name">BankIn</span>
+  </div>
+
+  <nav class="nav">
+    <p class="nav-group-label">Pilotage</p>
+
+    <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+      <mat-icon>dashboard</mat-icon>
+      <span>Vue d'ensemble</span>
+    </a>
+
+    <a routerLink="/accounts" routerLinkActive="active" class="nav-item">
+      <mat-icon>account_balance_wallet</mat-icon>
+      <span>Comptes</span>
+    </a>
+
+    <a routerLink="/transactions" routerLinkActive="active" class="nav-item">
+      <mat-icon>swap_horiz</mat-icon>
+      <span>Transactions</span>
+    </a>
+
+    <p class="nav-group-label">Plus</p>
+
+    <a routerLink="/budgets" routerLinkActive="active" class="nav-item">
+      <mat-icon>grid_view</mat-icon>
+      <span>Budget</span>
+    </a>
+
+    <a routerLink="/settings" routerLinkActive="active" class="nav-item">
+      <mat-icon>settings</mat-icon>
+      <span>Paramètres</span>
+    </a>
+  </nav>
+
+  <div class="side-card">
+    <mat-icon>shield</mat-icon>
+    <div>
+      <strong>Données chiffrées</strong>
+      <span>Connexion sécurisée AES-256</span>
+    </div>
+  </div>
+
+  <button class="nav-item logout">
+    <mat-icon>logout</mat-icon>
+    <span>Déconnexion</span>
+  </button>
+</aside>
