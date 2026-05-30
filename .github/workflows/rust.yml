@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/bankin-rust
+  IMAGE_NAME: ghcr.io/brsa-dev/bankin-rust
 
 jobs:
   build-and-push:
