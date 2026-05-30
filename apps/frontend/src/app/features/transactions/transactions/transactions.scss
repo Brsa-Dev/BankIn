@@ -1,0 +1,120 @@
+.transactions-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  border-radius: 16px !important;
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+
+    mat-icon { font-size: 18px; }
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  h3 { font-size: 22px; font-weight: 700; }
+
+  &.income .stat-icon { background: #E8F5E9; color: var(--color-positive); }
+  &.expenses .stat-icon { background: #FFEBEE; color: var(--color-negative); }
+  &.balance .stat-icon { background: #E3F2FD; color: var(--color-primary); }
+  &.count .stat-icon { background: #E0F7FA; color: var(--color-accent); }
+}
+
+.positive { color: var(--color-positive); }
+.negative { color: var(--color-negative); }
+
+.tx-card {
+  border-radius: 16px !important;
+
+  mat-card-title { font-size: 16px !important; font-weight: 600 !important; }
+}
+
+.tx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.tx-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+
+  &:last-child { border-bottom: none; }
+}
+
+.tx-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  mat-icon { font-size: 18px; }
+
+  &.credit { background: #E8F5E9; color: var(--color-positive); }
+  &.debit { background: #FFEBEE; color: var(--color-negative); }
+}
+
+.tx-info {
+  flex: 1;
+  strong { display: block; font-size: 14px; font-weight: 600; }
+  span { font-size: 12px; color: var(--color-text-muted); }
+}
+
+.tx-amount {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px;
+  color: var(--color-text-muted);
+
+  mat-icon { font-size: 48px; width: 48px; height: 48px; margin-bottom: 12px; }
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h3 { font-size: 18px; font-weight: 600; }
+}
+
+.btn-add {
+  background: var(--color-primary) !important;
+  color: white !important;
+  border-radius: 10px !important;
+}

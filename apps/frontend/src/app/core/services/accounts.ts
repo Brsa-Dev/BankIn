@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { switchMap } from 'rxjs/operators';
 
 const API_URL = 'http://localhost:3000';
 
@@ -19,5 +20,18 @@ export class AccountsService {
 
   getAll() {
     return this.http.get<Account[]>(`${API_URL}/accounts`);
+  }
+
+  createWithInstitution(data: { name: string; type: string; balance: number; currency: string; institutionName: string }) {
+    return this.http.post<{ id: number }>(`${API_URL}/institutions`, { name: data.institutionName })
+      .pipe(
+        switchMap(institution => this.http.post<Account>(`${API_URL}/accounts`, {
+          name: data.name,
+          type: data.type,
+          balance: data.balance,
+          currency: data.currency,
+          institutionId: institution.id
+        }))
+      );
   }
 }

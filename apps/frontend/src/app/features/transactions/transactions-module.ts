@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { Transactions } from './transactions/transactions';
 
-
+const routes: Routes = [
+  { path: '', component: Transactions }
+];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forChild(routes)]
 })
-export class TransactionsModule { }
+export class TransactionsModule {}

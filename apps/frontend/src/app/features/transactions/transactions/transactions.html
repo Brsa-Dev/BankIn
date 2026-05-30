@@ -1,0 +1,83 @@
+<div class="transactions-page">
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <mat-card class="stat-card income">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>arrow_downward</mat-icon>
+        </div>
+        <p class="eyebrow">Entrées</p>
+        <h3>{{ totalIncome | currency:'EUR':'symbol':'1.2-2':'fr' }}</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card expenses">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>arrow_upward</mat-icon>
+        </div>
+        <p class="eyebrow">Sorties</p>
+        <h3>{{ totalExpenses | currency:'EUR':'symbol':'1.2-2':'fr' }}</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card balance">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>swap_horiz</mat-icon>
+        </div>
+        <p class="eyebrow">Solde net</p>
+        <h3 [class.positive]="totalIncome - totalExpenses >= 0" [class.negative]="totalIncome - totalExpenses < 0">
+          {{ (totalIncome - totalExpenses) | currency:'EUR':'symbol':'1.2-2':'fr' }}
+        </h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card count">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>receipt</mat-icon>
+        </div>
+        <p class="eyebrow">Opérations</p>
+        <h3>{{ transactions.length }}</h3>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="section-header">
+    <h3>Toutes les transactions</h3>
+    <button mat-flat-button class="btn-add" (click)="openAddDialog()">
+      <mat-icon>add</mat-icon>
+      Ajouter une transaction
+    </button>
+  </div>
+  <!-- Liste -->
+  <mat-card class="tx-card">
+    <mat-card-header>
+      <mat-card-title>Toutes les transactions</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="tx-list">
+        <div class="tx-row" *ngFor="let tx of transactions">
+          <div class="tx-icon" [class.credit]="tx.type === 'CREDIT'" [class.debit]="tx.type === 'DEBIT'">
+            <mat-icon>{{ tx.type === 'CREDIT' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+          </div>
+          <div class="tx-info">
+            <strong>{{ tx.label }}</strong>
+            <span>{{ tx.account?.name }} · {{ tx.date | date:'dd MMM yyyy':'':'fr' }}</span>
+          </div>
+          <span class="tx-amount" [class.positive]="tx.type === 'CREDIT'" [class.negative]="tx.type === 'DEBIT'">
+            {{ tx.type === 'CREDIT' ? '+' : '-' }}{{ tx.amount | currency:'EUR':'symbol':'1.2-2':'fr' }}
+          </span>
+        </div>
+
+        <div class="empty" *ngIf="transactions.length === 0">
+          <mat-icon>receipt_long</mat-icon>
+          <p>Aucune transaction pour l'instant</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

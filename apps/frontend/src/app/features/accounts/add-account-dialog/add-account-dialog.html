@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Ajouter un compte</h2>
+
+<mat-dialog-content>
+  <div class="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nom du compte</mat-label>
+      <input matInput [(ngModel)]="name" placeholder="Compte Courant BNP" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Banque / Institution</mat-label>
+      <input matInput [(ngModel)]="institutionName" placeholder="BNP Paribas" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Type de compte</mat-label>
+      <mat-select [(ngModel)]="type">
+        <mat-option *ngFor="let t of accountTypes" [value]="t.value">
+          {{ t.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Solde initial</mat-label>
+      <input matInput type="number" [(ngModel)]="balance" />
+      <span matSuffix>€</span>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Annuler</button>
+  <button mat-flat-button class="btn-confirm" (click)="confirm()" [disabled]="!name || !institutionName">
+    Ajouter
+  </button>
+</mat-dialog-actions>

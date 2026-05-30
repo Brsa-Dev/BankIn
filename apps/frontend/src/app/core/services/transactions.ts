@@ -14,11 +14,23 @@ export interface Transaction {
   category?: { name: string; color: string; };
 }
 
+export interface CreateTransactionDto {
+  label: string;
+  amount: number;
+  type: string;
+  date: string;
+  accountId: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class TransactionsService {
   constructor(private http: HttpClient) {}
 
   getAll() {
     return this.http.get<Transaction[]>(`${API_URL}/transactions`);
+  }
+
+  create(dto: CreateTransactionDto) {
+    return this.http.post<Transaction>(`${API_URL}/transactions`, dto);
   }
 }

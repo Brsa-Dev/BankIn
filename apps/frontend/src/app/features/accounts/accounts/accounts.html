@@ -1,0 +1,51 @@
+<div class="accounts-page">
+
+  <!-- Stats top -->
+  <div class="stats-row">
+    <mat-card class="stat-card hero">
+      <mat-card-content>
+        <p class="eyebrow">Solde agrégé total</p>
+        <h2>{{ totalBalance | currency:'EUR':'symbol':'1.2-2':'fr' }}</h2>
+        <p class="sub">{{ accounts.length }} comptes</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Header -->
+  <div class="section-header">
+    <h3>Mes comptes</h3>
+    <button mat-flat-button class="btn-add" (click)="openAddDialog()">
+      <mat-icon>add</mat-icon>
+      Ajouter un compte
+    </button>
+  </div>
+
+  <!-- Liste des comptes -->
+  <div class="accounts-list">
+    <mat-card class="account-card" *ngFor="let account of accounts">
+      <mat-card-content>
+        <div class="account-header">
+          <div class="account-badge" [style.background]="getTypeColor(account.type)">
+            {{ account.institution?.name?.slice(0,2) || 'BK' }}
+          </div>
+          <div class="account-info">
+            <strong>{{ account.name }}</strong>
+            <span>{{ account.institution?.name }} · {{ getTypeLabel(account.type) }}</span>
+          </div>
+          <div class="account-balance">
+            <strong>{{ account.balance | currency:'EUR':'symbol':'1.2-2':'fr' }}</strong>
+          </div>
+          <button mat-icon-button>
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="empty" *ngIf="accounts.length === 0">
+      <mat-icon>account_balance_wallet</mat-icon>
+      <p>Aucun compte pour l'instant</p>
+    </div>
+  </div>
+
+</div>
