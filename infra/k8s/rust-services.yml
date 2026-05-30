@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-services
+  namespace: bankin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rust-services
+  template:
+    metadata:
+      labels:
+        app: rust-services
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: rust-services
+          image: ghcr.io/brsa-dev/bankin-rust:latest
+          ports:
+            - containerPort: 50051
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rust-services
+  namespace: bankin
+spec:
+  selector:
+    app: rust-services
+  ports:
+    - port: 50051
+      targetPort: 50051
