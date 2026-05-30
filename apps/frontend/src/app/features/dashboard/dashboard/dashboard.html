@@ -1,1 +1,65 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+
+  <!-- Hero card -->
+  <mat-card class="hero-card">
+    <mat-card-content>
+      <p class="eyebrow">Patrimoine net total</p>
+      <h2 class="hero-value">{{ totalBalance | currency:'EUR':'symbol':'1.2-2':'fr' }}</h2>
+      <p class="hero-sub">{{ accounts.length }} comptes agrégés</p>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="dashboard-grid">
+
+    <!-- Comptes -->
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Mes comptes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="account-list">
+          <div class="account-row" *ngFor="let account of accounts">
+            <div class="account-badge">{{ account.institution?.name?.slice(0,2) || 'BK' }}</div>
+            <div class="account-info">
+              <strong>{{ account.name }}</strong>
+              <span>{{ account.institution?.name }}</span>
+            </div>
+            <strong class="account-balance">
+              {{ account.balance | currency:'EUR':'symbol':'1.2-2':'fr' }}
+            </strong>
+          </div>
+          <div class="empty" *ngIf="accounts.length === 0">
+            Aucun compte
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Transactions récentes -->
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Transactions récentes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="tx-list">
+          <div class="tx-row" *ngFor="let tx of transactions">
+            <div class="tx-icon">
+              <mat-icon>{{ tx.type === 'CREDIT' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+            </div>
+            <div class="tx-info">
+              <strong>{{ tx.label }}</strong>
+              <span>{{ tx.date | date:'dd MMM yyyy':'':'fr' }}</span>
+            </div>
+            <span class="tx-amount" [class.positive]="tx.type === 'CREDIT'" [class.negative]="tx.type === 'DEBIT'">
+              {{ tx.type === 'CREDIT' ? '+' : '-' }}{{ tx.amount | currency:'EUR':'symbol':'1.2-2':'fr' }}
+            </span>
+          </div>
+          <div class="empty" *ngIf="transactions.length === 0">
+            Aucune transaction
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
