@@ -112,3 +112,13 @@
   text-align: center;
   padding: 24px;
 }
+
+::ng-deep .legend-title {
+  display: none;
+}
+
+::ng-deep .legend-label-text {
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  color: var(--color-text) !important;
+}

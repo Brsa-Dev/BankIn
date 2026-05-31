@@ -28,10 +28,45 @@
               {{ account.balance | currency:'EUR':'symbol':'1.2-2':'fr' }}
             </strong>
           </div>
-          <div class="empty" *ngIf="accounts.length === 0">
-            Aucun compte
-          </div>
+          <div class="empty" *ngIf="accounts.length === 0">Aucun compte</div>
         </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Donut chart -->
+    <mat-card class="card" *ngIf="allocationData.length > 0">
+      <mat-card-header>
+        <mat-card-title>Répartition</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ngx-charts-pie-chart
+          [results]="allocationData"
+          [scheme]="colorScheme"
+          [doughnut]="true"
+          [arcWidth]="0.4"
+          [legend]="true"
+          [legendPosition]="legendPosition"
+          [labels]="false"
+          [view]="[320, 250]">
+        </ngx-charts-pie-chart>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Dépenses par catégorie -->
+    <mat-card class="card" *ngIf="categoryData.length > 0">
+      <mat-card-header>
+        <mat-card-title>Dépenses par catégorie</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ngx-charts-bar-horizontal
+          [results]="categoryData"
+          [scheme]="colorScheme"
+          [xAxis]="true"
+          [yAxis]="true"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [view]="[400, 250]">
+        </ngx-charts-bar-horizontal>
       </mat-card-content>
     </mat-card>
 
@@ -54,9 +89,7 @@
               {{ tx.type === 'CREDIT' ? '+' : '-' }}{{ tx.amount | currency:'EUR':'symbol':'1.2-2':'fr' }}
             </span>
           </div>
-          <div class="empty" *ngIf="transactions.length === 0">
-            Aucune transaction
-          </div>
+          <div class="empty" *ngIf="transactions.length === 0">Aucune transaction</div>
         </div>
       </mat-card-content>
     </mat-card>
