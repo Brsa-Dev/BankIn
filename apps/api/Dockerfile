@@ -8,6 +8,7 @@ RUN npm install
 COPY . .
 RUN npx prisma generate
 RUN npm run build
+RUN npx tsc prisma/seed.ts --outDir dist/prisma --esModuleInterop --resolveJsonModule || true
 
 FROM node:22-alpine AS production
 
