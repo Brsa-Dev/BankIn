@@ -27,12 +27,30 @@ export class TransactionsService {
     }
 
     async create(dto: CreateTransactionDto) {
-        return this.prisma.transaction.create({
+        console.log('DTO reçu:', dto);
+        console.log('Amount:', dto.amount, typeof dto.amount);
+
+        const transaction = await this.prisma.transaction.create({
             data: {
                 ...dto,
                 date: new Date(dto.date)
             }
         });
+
+        console.log('Transaction créée:', transaction);
+
+        await this.prisma.account.update({
+            where: { id: dto.accountId },
+            data: {
+                balance: {
+                    increment: dto.type === 'CREDIT' ? Number(dto.amount) : -Number(dto.amount)
+                }
+            }
+        });
+
+        console.log('Solde mis à jour');
+
+        return transaction;
     }
 
     async delete(id: number) {
