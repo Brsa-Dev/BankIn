@@ -36,5 +36,20 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadChildren: () => import('./features/transactions/transactions-module').then(m => m.TransactionsModule)
   },
+  {
+    path: 'budgets',
+    canActivate: [authGuard],
+    loadChildren: () => import('./features/budgets/budgets-module').then(m => m.BudgetsModule)
+  },
+  {
+    path: 'assets',
+    canActivate: [authGuard],
+    loadChildren: () => import('./features/assets/assets-module').then(m => m.AssetsModule)
+  },
+  {
+    path: 'goals',
+    canActivate: [authGuard],
+    loadChildren: () => import('./features/goals/goals-module').then(m => m.GoalsModule)
+  },
   { path: '**', redirectTo: 'dashboard' }
 ];

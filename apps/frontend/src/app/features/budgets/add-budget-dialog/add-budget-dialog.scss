@@ -1,0 +1,58 @@
+h2 {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: var(--color-primary) !important;
+  padding: 24px 24px 0 !important;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  min-width: 440px;
+}
+
+.full-width { width: 100%; }
+
+::ng-deep .mat-mdc-dialog-surface {
+  border-radius: 20px !important;
+  padding: 0 !important;
+}
+
+::ng-deep .mat-mdc-dialog-content {
+  padding: 8px 24px !important;
+}
+
+::ng-deep .mat-mdc-dialog-actions {
+  padding: 12px 24px 20px !important;
+  gap: 8px;
+}
+
+.btn-confirm {
+  background: var(--color-primary) !important;
+  color: white !important;
+  border-radius: 10px !important;
+  padding: 0 24px !important;
+  height: 42px !important;
+  font-weight: 600 !important;
+}
+
+button[mat-button] {
+  color: var(--color-text-muted) !important;
+  border-radius: 10px !important;
+}
+
+::ng-deep .mat-mdc-select {
+  background: transparent !important;
+}
+
+::ng-deep .mat-mdc-form-field-flex {
+  background: white !important;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}

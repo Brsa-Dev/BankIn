@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Ajouter un actif</h2>
+
+<mat-dialog-content>
+  <div class="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nom</mat-label>
+      <input matInput [(ngModel)]="name" placeholder="Appartement Paris" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Type</mat-label>
+      <mat-select [(ngModel)]="type">
+        <mat-option *ngFor="let t of assetTypes" [value]="t.value">{{ t.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Valeur estimée</mat-label>
+      <input matInput type="number" [(ngModel)]="estimatedValue" placeholder="0" />
+      <span matSuffix>€</span>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Annuler</button>
+  <button mat-flat-button class="btn-confirm" (click)="confirm()" [disabled]="!name || !estimatedValue">
+    Ajouter
+  </button>
+</mat-dialog-actions>

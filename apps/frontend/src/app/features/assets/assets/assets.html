@@ -1,0 +1,49 @@
+<div class="assets-page">
+
+  <!-- Hero -->
+  <mat-card class="hero-card">
+    <mat-card-content>
+      <p class="eyebrow">Valeur totale des actifs</p>
+      <h2>{{ totalValue | currency:'EUR':'symbol':'1.2-2':'fr' }}</h2>
+      <p class="sub">{{ assets.length }} actifs</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Header -->
+  <div class="section-header">
+    <h3>Mes actifs</h3>
+    <button mat-flat-button class="btn-add" (click)="openAddDialog()">
+      <mat-icon>add</mat-icon>
+      Ajouter un actif
+    </button>
+  </div>
+
+  <!-- Liste -->
+  <div class="assets-grid">
+    <mat-card class="asset-card" *ngFor="let asset of assets">
+      <mat-card-content>
+        <div class="asset-header">
+          <div class="asset-icon" [style.background]="getTypeColor(asset.type) + '1A'" [style.color]="getTypeColor(asset.type)">
+            <mat-icon>{{ getTypeIcon(asset.type) }}</mat-icon>
+          </div>
+          <div class="asset-info">
+            <strong>{{ asset.name }}</strong>
+            <span>{{ getTypeLabel(asset.type) }} · {{ asset.currency }}</span>
+          </div>
+          <button mat-icon-button (click)="delete(asset.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <div class="asset-value">
+          {{ asset.estimatedValue | currency:'EUR':'symbol':'1.2-2':'fr' }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="empty" *ngIf="assets.length === 0">
+    <mat-icon>account_balance</mat-icon>
+    <p>Aucun actif pour l'instant</p>
+  </div>
+
+</div>

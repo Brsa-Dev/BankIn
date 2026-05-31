@@ -1,0 +1,79 @@
+.budgets-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 { font-size: 22px; font-weight: 700; }
+  .sub { font-size: 13px; color: var(--color-text-muted); margin-top: 2px; }
+}
+
+.btn-add {
+  background: var(--color-primary) !important;
+  color: white !important;
+  border-radius: 10px !important;
+}
+
+.budgets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.budget-card {
+  border-radius: 16px !important;
+}
+
+.budget-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.budget-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(26, 35, 126, 0.08);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.budget-info {
+  flex: 1;
+  strong { display: block; font-size: 15px; font-weight: 600; }
+  span { font-size: 12px; color: var(--color-text-muted); }
+}
+
+.budget-amounts {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 8px;
+
+  .spent { font-size: 20px; font-weight: 700; color: var(--color-text); }
+  .limit { font-size: 14px; color: var(--color-text-muted); }
+}
+
+.budget-sub {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px;
+  color: var(--color-text-muted);
+
+  mat-icon { font-size: 48px; width: 48px; height: 48px; margin-bottom: 12px; }
+}

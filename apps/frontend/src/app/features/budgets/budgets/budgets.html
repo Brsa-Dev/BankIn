@@ -1,0 +1,51 @@
+<div class="budgets-page">
+
+  <div class="section-header">
+    <div>
+      <h2>Budgets</h2>
+      <p class="sub">{{ getMonthName(currentMonth) }} {{ currentYear }}</p>
+    </div>
+    <button mat-flat-button class="btn-add" (click)="openAddDialog()">
+      <mat-icon>add</mat-icon>
+      Ajouter un budget
+    </button>
+  </div>
+
+  <div class="budgets-grid">
+    <mat-card class="budget-card" *ngFor="let budget of budgets">
+      <mat-card-content>
+        <div class="budget-header">
+          <div class="budget-icon">
+            <mat-icon>grid_view</mat-icon>
+          </div>
+          <div class="budget-info">
+            <strong>{{ budget.category?.name || 'Catégorie' }}</strong>
+            <span>{{ getMonthName(budget.month) }} {{ budget.year }}</span>
+          </div>
+          <button mat-icon-button (click)="delete(budget.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div class="budget-amounts">
+          <span class="spent">0 €</span>
+          <span class="limit">/ {{ budget.limit | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+        </div>
+
+        <mat-progress-bar
+          mode="determinate"
+          [value]="getProgress(budget)"
+          [color]="getProgress(budget) >= 100 ? 'warn' : 'primary'">
+        </mat-progress-bar>
+
+        <p class="budget-sub">{{ getProgress(budget) }}% utilisé</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="empty" *ngIf="budgets.length === 0">
+    <mat-icon>grid_view</mat-icon>
+    <p>Aucun budget pour l'instant</p>
+  </div>
+
+</div>

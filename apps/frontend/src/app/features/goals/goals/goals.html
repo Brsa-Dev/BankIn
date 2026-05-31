@@ -1,0 +1,53 @@
+<div class="goals-page">
+
+  <div class="section-header">
+    <div>
+      <h2>Objectifs</h2>
+      <p class="sub">{{ goals.length }} objectif(s) en cours</p>
+    </div>
+    <button mat-flat-button class="btn-add" (click)="openAddDialog()">
+      <mat-icon>add</mat-icon>
+      Ajouter un objectif
+    </button>
+  </div>
+
+  <div class="goals-grid">
+    <mat-card class="goal-card" *ngFor="let goal of goals">
+      <mat-card-content>
+        <div class="goal-header">
+          <div class="goal-icon">
+            <mat-icon>flag</mat-icon>
+          </div>
+          <div class="goal-info">
+            <strong>{{ goal.name }}</strong>
+            <span *ngIf="goal.deadline">
+              {{ getRemainingDays(goal.deadline) }} jours restants
+            </span>
+          </div>
+          <button mat-icon-button (click)="delete(goal.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div class="goal-amounts">
+          <span class="current">{{ goal.currentAmount | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+          <span class="target">/ {{ goal.targetAmount | currency:'EUR':'symbol':'1.0-0':'fr' }}</span>
+        </div>
+
+        <mat-progress-bar
+          mode="determinate"
+          [value]="getProgress(goal)"
+          [color]="getProgress(goal) >= 100 ? 'accent' : 'primary'">
+        </mat-progress-bar>
+
+        <p class="goal-sub">{{ getProgress(goal) }}% atteint</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="empty" *ngIf="goals.length === 0">
+    <mat-icon>flag</mat-icon>
+    <p>Aucun objectif pour l'instant</p>
+  </div>
+
+</div>

@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Ajouter un budget</h2>
+
+<mat-dialog-content>
+  <div class="form">
+    <div class="field-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Mois</mat-label>
+        <mat-select [(ngModel)]="month">
+          <mat-option *ngFor="let m of months" [value]="m.value">{{ m.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Année</mat-label>
+        <input matInput type="number" [(ngModel)]="year" />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Catégorie</mat-label>
+      <mat-select [(ngModel)]="categoryId">
+        <mat-option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Plafond mensuel</mat-label>
+      <input matInput type="number" [(ngModel)]="limit" placeholder="400" />
+      <span matSuffix>€</span>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Annuler</button>
+  <button mat-flat-button class="btn-confirm" (click)="confirm()" [disabled]="!limit || !categoryId">
+    Ajouter
+  </button>
+</mat-dialog-actions>

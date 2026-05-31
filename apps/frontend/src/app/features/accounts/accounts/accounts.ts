@@ -65,4 +65,5 @@ export class Accounts implements OnInit {
     };
     return colors[type] || '#1A237E';
   }
+
 }
